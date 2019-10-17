@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Library</string>
+
+    <string name="warn_sort">拖拽可以排序</string>
+    <string name="warn_into">点击进入频道</string>
+    <string name="warn_rise">点击添加频道</string>
+    <string name="warn_mine">我的频道</string>
+    <string name="warn_keep">频道推荐</string>
+    <string name="warn_edit">编辑</string>
+    <string name="warn_done">完成</string>
 </resources>
