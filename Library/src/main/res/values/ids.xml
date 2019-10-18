@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="mine_head_warn" type="id" />
+    <item name="mine_head_edit" type="id" />
+    <item name="mine_item_name" type="id" />
+    <item name="mine_item_exec" type="id" />
+    <item name="keep_head_name" type="id" />
+    <item name="keep_item_name" type="id" />
+
+</resources>

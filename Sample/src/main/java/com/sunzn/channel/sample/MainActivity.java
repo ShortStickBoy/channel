@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sunzn.channel.library.ChannelAdapter;
-import com.sunzn.channel.library.ChannelBean;
+import com.sunzn.channel.library.ChannelBase;
 import com.sunzn.channel.library.ItemTouchHelperCallback;
 
 import java.util.ArrayList;
@@ -29,13 +29,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        final List<ChannelBean> items = new ArrayList<>();
+        final List<ChannelBase> items = new ArrayList<>();
         for (int i = 0; i < 18; i++) {
             ChannelBean entity = new ChannelBean();
             entity.setName("频道" + i);
             items.add(entity);
         }
-        final List<ChannelBean> otherItems = new ArrayList<>();
+        final List<ChannelBase> otherItems = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             ChannelBean entity = new ChannelBean();
             entity.setName("其他" + i);
@@ -49,12 +49,12 @@ public class MainActivity extends AppCompatActivity {
         final ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(mRecy);
 
-        final ChannelAdapter adapter = new ChannelAdapter(this, helper, items, otherItems);
+        final Adapter adapter = new Adapter(this, helper, items, otherItems);
         manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
                 int viewType = adapter.getItemViewType(position);
-                return viewType == ChannelAdapter.TYPE_ITEM_MINE_ITEM || viewType == ChannelAdapter.TYPE_TIEM_KEEP_ITEM ? 1 : 4;
+                return viewType == ChannelAdapter.TYPE_ITEM_MINE_ITEM || viewType == ChannelAdapter.TYPE_ITEM_KEEP_ITEM ? 1 : 4;
             }
         });
         mRecy.setAdapter(adapter);
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnMyChannelItemClickListener(new ChannelAdapter.OnMyChannelItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                Toast.makeText(MainActivity.this, items.get(position).getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, items.get(position).getValue(), Toast.LENGTH_SHORT).show();
             }
         });
     }

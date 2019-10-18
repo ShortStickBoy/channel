@@ -34,7 +34,7 @@ public class MineItemViewHolder extends RecyclerView.ViewHolder implements OnDra
      */
     @Override
     public void onItemSelected() {
-        nameView.setBackgroundResource(R.drawable.bg_channel_p);
+        nameView.setBackgroundResource(R.drawable.cxt_mine_keep_push);
     }
 
     /**
