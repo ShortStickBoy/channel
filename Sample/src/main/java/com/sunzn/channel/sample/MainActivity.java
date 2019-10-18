@@ -29,40 +29,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        final List<ChannelBase> items = new ArrayList<>();
+        final List<ChannelBase> mine = new ArrayList<>();
         for (int i = 0; i < 18; i++) {
             ChannelBean entity = new ChannelBean();
-            entity.setName("频道" + i);
-            items.add(entity);
+            switch (i) {
+                case 0:
+                    entity.setName("关注");
+                    break;
+                case 1:
+                    entity.setName("推荐");
+                    break;
+                default:
+                    entity.setName("频道" + i);
+                    break;
+            }
+            mine.add(entity);
         }
-        final List<ChannelBase> otherItems = new ArrayList<>();
+        final List<ChannelBase> keep = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             ChannelBean entity = new ChannelBean();
             entity.setName("其他" + i);
-            otherItems.add(entity);
+            keep.add(entity);
         }
 
         GridLayoutManager manager = new GridLayoutManager(this, 4);
         mRecy.setLayoutManager(manager);
 
         ItemTouchHelperCallback callback = new ItemTouchHelperCallback();
-        final ItemTouchHelper helper = new ItemTouchHelper(callback);
+        ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(mRecy);
 
-        final Adapter adapter = new Adapter(this, helper, items, otherItems);
-        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                int viewType = adapter.getItemViewType(position);
-                return viewType == ChannelAdapter.TYPE_ITEM_MINE_ITEM || viewType == ChannelAdapter.TYPE_ITEM_KEEP_ITEM ? 1 : 4;
-            }
-        });
+        Adapter adapter = new Adapter(this, helper, mine, keep);
         mRecy.setAdapter(adapter);
 
-        adapter.setOnMyChannelItemClickListener(new ChannelAdapter.OnMyChannelItemClickListener() {
+        adapter.setMineChannelItemClickListener(new ChannelAdapter.OnMineChannelItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                Toast.makeText(MainActivity.this, items.get(position).getValue(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, mine.get(position).getValue(), Toast.LENGTH_SHORT).show();
             }
         });
     }

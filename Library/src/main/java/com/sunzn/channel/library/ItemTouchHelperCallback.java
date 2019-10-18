@@ -33,7 +33,11 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
             return false;
         }
 
-        if (target.getAdapterPosition() < 2) {
+        if (viewHolder.getAdapterPosition() < 3) {
+            return false;
+        }
+
+        if (target.getAdapterPosition() < 3) {
             return false;
         }
 
@@ -81,4 +85,5 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
         // 不支持滑动功能
         return false;
     }
+
 }
